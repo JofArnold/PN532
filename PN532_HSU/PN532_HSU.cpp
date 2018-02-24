@@ -16,11 +16,11 @@ void PN532_HSU::begin()
 
 void PN532_HSU::wakeup()
 {
-    _serial->write(0x55);
-    _serial->write(0x55);
-    _serial->write(0);
-    _serial->write(0);
-    _serial->write(0);
+    _serial->write((byte)(byte)0x55);
+    _serial->write((byte)(byte)0x55);
+    _serial->write((byte)(byte)0);
+    _serial->write((byte)(byte)0);
+    _serial->write((byte)(byte)0);
 
     /** dump serial buffer */
     if(_serial->available()){
@@ -47,15 +47,15 @@ int8_t PN532_HSU::writeCommand(const uint8_t *header, uint8_t hlen, const uint8_
 
     command = header[0];
     
-    _serial->write(PN532_PREAMBLE);
-    _serial->write(PN532_STARTCODE1);
-    _serial->write(PN532_STARTCODE2);
+    _serial->write((byte)PN532_PREAMBLE);
+    _serial->write((byte)PN532_STARTCODE1);
+    _serial->write((byte)PN532_STARTCODE2);
     
     uint8_t length = hlen + blen + 1;   // length of data field: TFI + DATA
-    _serial->write(length);
-    _serial->write(~length + 1);         // checksum of length
+    _serial->write((byte)length);
+    _serial->write((byte)~length + 1);         // checksum of length
     
-    _serial->write(PN532_HOSTTOPN532);
+    _serial->write((byte)PN532_HOSTTOPN532);
     uint8_t sum = PN532_HOSTTOPN532;    // sum of TFI + DATA
 
     DMSG("\nWrite: ");
@@ -75,8 +75,8 @@ int8_t PN532_HSU::writeCommand(const uint8_t *header, uint8_t hlen, const uint8_
     }
     
     uint8_t checksum = ~sum + 1;            // checksum of TFI + DATA
-    _serial->write(checksum);
-    _serial->write(PN532_POSTAMBLE);
+    _serial->write((byte)checksum);
+    _serial->write((byte)PN532_POSTAMBLE);
 
     return readAckFrame();
 }
