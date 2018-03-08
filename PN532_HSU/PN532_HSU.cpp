@@ -21,6 +21,17 @@ void PN532_HSU::wakeup()
     _serial->write((byte)(byte)0);
     _serial->write((byte)(byte)0);
     _serial->write((byte)(byte)0);
+    _serial->write((byte)(byte)0);
+    _serial->write((byte)(byte)0);
+    _serial->write((byte)(byte)0);
+    _serial->write((byte)(byte)0);
+    _serial->write((byte)(byte)0);
+    _serial->write((byte)(byte)0);
+    _serial->write((byte)(byte)0);
+    _serial->write((byte)(byte)0);
+    _serial->write((byte)(byte)0);
+    _serial->write((byte)(byte)0);
+    _serial->write((byte)(byte)0);
 
     /** dump serial buffer */
     if(_serial->available()){
